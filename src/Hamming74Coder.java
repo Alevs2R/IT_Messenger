@@ -7,12 +7,12 @@ public class Hamming74Coder {
     public Hamming74Coder() {
     }
 
-    public int[] coding(int[] initialBits){
+    public byte[] coding(byte[] initialBits){
 
         //number of bits should devides by 4
         if((initialBits.length % 4) != 0){
-            int[] oldInitialBits = initialBits;
-            initialBits = new int[oldInitialBits.length/4 * 4 + 4];
+            byte[] oldInitialBits = initialBits;
+            initialBits = new byte[oldInitialBits.length/4 * 4 + 4];
             for (int i = 0; i < 4 - (oldInitialBits.length % 4); i++) {
                 initialBits[i] = 0;
             }
@@ -21,9 +21,9 @@ public class Hamming74Coder {
             }
         }
 
-        int[] codedBits = new int[7 * (initialBits.length/4)];
+        byte[] codedBits = new byte[7 * (initialBits.length/4)];
         for (int i = 0; i < (initialBits.length/4); i++) {
-            int[] tempBits = code4bits(new int[]{initialBits[4*i],initialBits[4*i+1],initialBits[4*i+2],initialBits[4*i+3]});
+            byte[] tempBits = code4bits(new byte[]{initialBits[4*i],initialBits[4*i+1],initialBits[4*i+2],initialBits[4*i+3]});
             codedBits[7*i] = tempBits[0];
             codedBits[7*i+1] = tempBits[1];
             codedBits[7*i+2] = tempBits[2];
@@ -37,8 +37,8 @@ public class Hamming74Coder {
 
     }
 
-    private int[] code4bits(int[] initialBits){
-        int[] out_boolean = new int[]{0,0,0,0,0,0,0};
+    private byte[] code4bits(byte[] initialBits){
+        byte[] out_boolean = new byte[]{0,0,0,0,0,0,0};
         out_boolean[0] = initialBits[0];
         out_boolean[1] = initialBits[0];
         out_boolean[2] = initialBits[0];

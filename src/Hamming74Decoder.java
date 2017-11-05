@@ -8,12 +8,12 @@ public class Hamming74Decoder {
     public Hamming74Decoder() {
     }
 
-    public int[] decoding(int[] initialBits){
+    public byte[] decoding(byte[] initialBits){
 
         //number of bits should devides by 7
         if((initialBits.length % 7) != 0){
-            int[] oldInitialBits = initialBits;
-            initialBits = new int[oldInitialBits.length/7 * 7 + 7];
+            byte[] oldInitialBits = initialBits;
+            initialBits = new byte[oldInitialBits.length/7 * 7 + 7];
             for (int i = 0; i < 7 - (oldInitialBits.length % 7); i++) {
                 initialBits[i] = 0;
             }
@@ -22,9 +22,9 @@ public class Hamming74Decoder {
             }
         }
 
-        int[] codedBits = new int[4 * (initialBits.length/7)];
+        byte[] codedBits = new byte[4 * (initialBits.length/7)];
         for (int i = 0; i < (initialBits.length/7); i++) {
-            int[] tempBits = decode4bits(new int[]{initialBits[7*i],initialBits[7*i+1],initialBits[7*i+2],initialBits[7*i+3],
+            byte[] tempBits = decode4bits(new byte[]{initialBits[7*i],initialBits[7*i+1],initialBits[7*i+2],initialBits[7*i+3],
                     initialBits[7*i+4],initialBits[7*i+5],initialBits[7*i+6]});
             codedBits[4*i] = tempBits[0];
             codedBits[4*i+1] = tempBits[1];
@@ -36,7 +36,7 @@ public class Hamming74Decoder {
 
     }
 
-    private int[] decode4bits(int[] initialBits){
+    private byte[] decode4bits(byte[] initialBits){
         int e1 =(initialBits[0] + initialBits[2] + initialBits[4] + initialBits[6])%2;
         int e2 =(initialBits[1] + initialBits[2] + initialBits[5] + initialBits[6])%2;
         int e3 =(initialBits[3] + initialBits[4] + initialBits[5] + initialBits[6])%2;
@@ -46,6 +46,6 @@ public class Hamming74Decoder {
             initialBits[err - 1] %= 2;
         }
 
-        return new int[]{initialBits[2], initialBits[4], initialBits[5], initialBits[6]};
+        return new byte[]{initialBits[2], initialBits[4], initialBits[5], initialBits[6]};
     }
 }
