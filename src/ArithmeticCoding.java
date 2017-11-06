@@ -2,7 +2,11 @@ import java.io.*;
 
 class ArithmeticCoding {
 
-
+    /**
+     * This method compresses input file using Arithmetic Codng algorithm.
+     * @param fileName is the input file that needs to be compressed
+     * @return array of bytes (after compression)
+     */
     byte[] compressFile(String fileName) throws IOException {
         File initialFile = new File(fileName);
         InputStream targetStream = new FileInputStream(initialFile);
@@ -13,6 +17,11 @@ class ArithmeticCoding {
         return arr2;
     }
 
+    /**
+     * This method decompresses byte array of data (compressed using Arithmetic Coding)
+     * @param b is the byte array that needs to be decompressed
+     * @param fileName output file, in which we need to save result of decompression
+     */
     public void decompressFile(byte[] b, String fileName) throws IOException {
         InputStream in = new ByteArrayInputStream(b);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -24,6 +33,11 @@ class ArithmeticCoding {
         outFile.close();
     }
 
+    /**
+     * Private compression method that starts Arithmetic Compressor.
+     * @param b input byte array
+     * @return compressed byte array
+     */
     private byte[] compress(byte[] b) throws IOException {
         InputStream in = new ByteArrayInputStream(b);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -34,6 +48,11 @@ class ArithmeticCoding {
         return out.toByteArray();
     }
 
+    /**
+     * Private decompression method that starts Arithmetic Decompressor.
+     * @param b input byte array
+     * @return compressed byte array
+     */
     private byte[] decompress(byte[] b) throws IOException {
         InputStream in = new ByteArrayInputStream(b);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
