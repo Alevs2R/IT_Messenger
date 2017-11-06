@@ -8,7 +8,7 @@ import {DocumentPicker, ImagePicker} from 'expo';
 import Pusher from 'pusher-js/react-native';
 const uuidv4 = require('uuid/v4');
 
-const SERVER_URI = '192.168.0.102:3000';
+const SERVER_URI = '78.155.218.30:3000';
 
 export default class ChatContainer extends React.Component {
 
