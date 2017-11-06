@@ -2,11 +2,6 @@ import React from 'react';
 import {Text, Dimensions, ToastAndroid, View, TextInput, Button} from "react-native";
 import {styles} from "./styles";
 
-
-const width = Dimensions.get('window').width;
-const contentWidth = width - 40;
-
-
 export default class EnterNickname extends React.Component {
     state = {
         nickname: ''
