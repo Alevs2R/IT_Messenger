@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class RunLengthCompression {
 
-    static Object[] compress(byte[] binary) {
+    static Byte[] compress(byte[] binary) {
         ArrayList<Byte> compressed = new ArrayList<>();
         int counter = 1;
         for (int i = 0; i < binary.length; i++) {
@@ -18,10 +18,10 @@ class RunLengthCompression {
             compressed.add(binary[i]);
             counter = 1;
         }
-        return compressed.toArray();
+        return (Byte[]) compressed.toArray();
     }
 
-    static Object[] decompress(byte[] compressed) {
+    static Byte[] decompress(byte[] compressed) {
         ArrayList<Byte> decompressed = new ArrayList<>();
         byte tmp;
         int count = 0;
@@ -38,7 +38,7 @@ class RunLengthCompression {
             i++;
             count = 0;
         }
-        return decompressed.toArray();
+        return (Byte[]) decompressed.toArray();
 
     }
 }
