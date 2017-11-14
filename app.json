@@ -3,6 +3,23 @@
     "sdkVersion": "22.0.0",
     "androidStatusBar": {
       "backgroundColor": "#000000"
+    },
+    "ios": {
+      "bundleIdentifier": "qwerty",
+      "publishBundlePath": "ios/it_messenger/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/it_messenger/Supporting/shell-app-manifest.json"
+    },
+    "android": {
+      "package": "com.alevs2r.messenger"
+    },
+    "name": "IT_Messenger",
+    "slug": "it_messenger",
+    "version": "0.1.0",
+    "isDetached": true,
+    "detach": {
+      "scheme": "exp5664566c03e249f38fed8e4b9eed8117",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.0.4-sdk22.0.0-10110e7c-e9b1-43e6-b7e0-8a0e971480e8.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.0.0-sdk22.0.0-7432f75c-05a1-4826-a456-02875e338222.tar.gz"
     }
   }
 }
