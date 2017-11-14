@@ -1,36 +1,44 @@
+import java.util.ArrayList;
+
 class RunLengthCompression {
-    static String compress(String source) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < source.length(); i++) {
-            int runLength = 1;
-            while (i+1 < source.length() && source.charAt(i) == source.charAt(i+1)) {
-                runLength++;
+
+    static Object[] compress(byte[] binary) {
+        ArrayList<Byte> compressed = new ArrayList<>();
+        int counter = 1;
+        for (int i = 0; i < binary.length; i++) {
+            while (i + 1 < binary.length && binary[i] == binary[i + 1]) {
+                counter++;
+                if (counter == 256) {
+                    compressed.add((byte) 0);
+                    counter = 1;
+                }
                 i++;
             }
-            if (runLength == 1){
-                result.append(source.charAt(i));
-            }
-            else {
-                result.append(runLength);
-                result.append(source.charAt(i));
-            }
+            compressed.add((byte) counter);
+            compressed.add(binary[i]);
+            counter = 1;
         }
-        return result.toString();
+        return compressed.toArray();
     }
 
-    static String decompress(String input){
-        StringBuilder result  = new StringBuilder();
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '0' || input.charAt(i) == '1') {
-                result.append(input.charAt(i));
+    static Object[] decompress(byte[] compressed) {
+        ArrayList<Byte> decompressed = new ArrayList<>();
+        byte tmp;
+        int count = 0;
+        for (int i = 0; i < compressed.length; i++) {
+            tmp = compressed[i];
+            if (tmp == 0) {
+                count += 255;
+                continue;
             }
-            else{
-                int num = Integer.parseInt(input.substring(i,i+1));
-                while (--num != 0){
-                    result.append(input.charAt(i+1));
-                }
+            count += tmp;
+            for (int j = 0; j < count; j++) {
+                decompressed.add(compressed[i + 1]);
             }
+            i++;
+            count = 0;
         }
-        return result.toString();
+        return decompressed.toArray();
+
     }
 }
