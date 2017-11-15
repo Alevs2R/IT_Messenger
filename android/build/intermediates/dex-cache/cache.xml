@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_d8296aab1584379db8264f374de76d5b6fdcbd1d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_9a8c61e330be7640111d03c0968e6c3f89b501f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.49.5/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_f05fa4449ef42064ae92eb78764ac14d32d5c26b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_37c22410d739eea0ff6e7215dd76afc70fb82737.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_fd3391da642f53b5afca9675609820f64ef6a9ef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_607645442a8bc4a63955d01ab973ed02f0e94a72.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_d5aecd6547332cae74fd8497fc3747a33b17bc81.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.49.5/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="610b957661a666d16b2cd4664c6bf4370226dfd2">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.49.5_4d4024fc8ecde22166a59d289914c6e34652ffdb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_5ff8c26b5a8a5ca9ce8edbf19cac32401543c926.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_dacd485f1e0930cd6d7e0cdf9e9ee5e4c28f0e0b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_25d0f97b473d07cfb98bf8e681aa5e04c35de3c9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/magic_messenger/react-native-fs/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ff02acd414a04753c59eba84a60a7022f398e1f7">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/magic_messenger-react-native-fs-unspecified_cde6bda91f0261161fb11b93e163290d0cb962e2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_8a2da966c1c764e8ae432eba6224d083fd9260dc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_7713eb20598f2b72e45da34a86f28923a93f97ff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_6b8ad3119b48b8f187a3875b001a1d7c3200a3fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_e897bf9d5ff0bd5b860d2ea451211537a2ba35fb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_83ebfcc4f625ed41cc043b941c23b00f18ec1698.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_5d84f80279fa6324477ffefcce6acc8e4a974b8b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/magic_messenger/react-native-document-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="7fb6469ebee8229adbaeb2f156504c1160a8ec17">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/magic_messenger-react-native-document-picker-unspecified_440086d291ea5ce23def07ab554169bfbf9e542c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_fc8b678deba62b7b175db625e170b5b519b805e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_fec45a56cf30bd2e58e7e2989ce8c15ad5a9af37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_ec270c83b2a58f4fff3ec9f2551569a59b9b36ba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_aac5dea185b632b0ea70c773718d9ecb7599db93.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,4 @@
+#Wed Nov 15 16:47:46 MSK 2017
+base.0=/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/user/IdeaProjects/magic_messenger/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
