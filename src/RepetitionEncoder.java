@@ -8,16 +8,18 @@ public class RepetitionEncoder {
 
     /**
      * This method encodes bit sequence using Repetition method
-     * @param bitSequence - sequence to be encoded
+     * @param byteSequence - sequence to be encoded
      * @param n - number of repetitions, MUST BE ODD
-     * @return string - encoded sequence
+     * @return byte[] encodedSequence - encoded sequence
      */
-    public String encode(String bitSequence, int n){
-        String encodedSequence = new String();
-        for(int i=0; i<bitSequence.length(); i++){ //for every symbol in a sequence
+    public byte[] encode(byte[] byteSequence, int n){
+        byte[] encodedSequence = new byte[byteSequence.length * n];
+        int count = 0;
+        for(int i=0; i<byteSequence.length*n; i+=n){ //for every symbol in a sequence
             for(int k=0; k<n; k++){ //repeat it n times
-                encodedSequence = encodedSequence + bitSequence.charAt(i);
+                encodedSequence[i+k] = byteSequence[count];
             }
+            count++;
         }
         return encodedSequence;
     }

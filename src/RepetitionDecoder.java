@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class represents decoder for the transmitted sequence that was encoded using Repetition method
  */
@@ -10,20 +13,30 @@ public class RepetitionDecoder {
      * This method decodes transmitted sequence that was encoded using Repetition method
      * @param noisySequence - transmitted sequence with some bits flipped
      * @param n - number of repetitions
-     * @return - decoded sequence
+     * @return byte[] decodedSequence - decoded sequence
      */
-    public String decode(String noisySequence, int n){
-        String decodedSequence = new String();
-        int nz = 0; //number of zeroes
-        int no = 0; //number of ones
-        for(int i=0; i<noisySequence.length(); i+=n){ //for every n-length-tuple
-            for(int k=0; k<n; k++){ //checking every symbol in n-length tuple
-                if(noisySequence.charAt(i+k) == '0') nz++;
-                else no++;
+    public byte[] decode(byte[] noisySequence, int n){
+        byte[] decodedSequence = new byte[noisySequence.length/n];
+        int count=0;
+        for(int i=0; i<noisySequence.length/n; i++){
+            Map<Byte, Integer> frequency = new HashMap<>();
+            for (int k = 0; k < n; k++) {
+                if (frequency.containsValue(noisySequence[count+k])) {
+                    frequency.put(noisySequence[count+k], frequency.get(noisySequence[count+k])+1);
+                } else {
+                    frequency.put(noisySequence[count + k], 1);
+                }
             }
-            if(no>nz) decodedSequence += "1"; //if number of ones in a tuple is bigger => 1
-            else decodedSequence += "0"; //else => 0
-            nz=0; no=0;
+            byte finalByte = 0;
+            int maxFreq = 0;
+            for (byte currByte : frequency.keySet()) {
+                if (maxFreq < frequency.get(currByte)){ //if frequency of current byte is higher than before
+                    maxFreq = frequency.get(currByte); //update maximum frequency
+                    finalByte = currByte; //update final byte
+                }
+            }
+            decodedSequence[i] = finalByte;
+            count+=n;
         }
         return decodedSequence;
     }

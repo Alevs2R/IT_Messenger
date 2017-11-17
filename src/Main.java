@@ -1,13 +1,15 @@
-public class Main {
-    public static void main(String[] args) {
-        String toEncode = "101";
-        RepetitionEncoder re = new RepetitionEncoder();
-        String encoded = re.encode(toEncode,3);
-        System.out.println(encoded);
+import java.io.*;
 
-        String toDecode = "010111011100101";
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        byte[] testArr = {-2, -40, 119, -91};
+
+        RepetitionEncoder re = new RepetitionEncoder();
+        byte[] encoded = re.encode(testArr,3);
+
         RepetitionDecoder rd = new RepetitionDecoder();
-        String decoded = rd.decode(toDecode,3);
-        System.out.println(decoded);
+        byte[] decoded = rd.decode(encoded,3);
+        System.out.println("!!!");
     }
 }
