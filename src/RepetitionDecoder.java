@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * This class represents decoder for the transmitted sequence that was encoded using Repetition method
  */
@@ -16,27 +13,37 @@ public class RepetitionDecoder {
      * @return byte[] decodedSequence - decoded sequence
      */
     public byte[] decode(byte[] noisySequence, int n){
-        byte[] decodedSequence = new byte[noisySequence.length/n];
+        int[] bits = new int[8 * noisySequence.length];
+        //converting into bits
+        for (int i = 0; i < bits.length; i++) {
+            bits[i] = (noisySequence[i / 8] >> (7 - i % 8)) & 1;
+        }
+        int[] decodedBits = new int[bits.length/n];
+        byte[] decodedSequence = new byte[decodedBits.length/8];
         int count=0;
-        for(int i=0; i<noisySequence.length/n; i++){
-            Map<Byte, Integer> frequency = new HashMap<>();
-            for (int k = 0; k < n; k++) {
-                if (frequency.containsValue(noisySequence[count+k])) {
-                    frequency.put(noisySequence[count+k], frequency.get(noisySequence[count+k])+1);
-                } else {
-                    frequency.put(noisySequence[count + k], 1);
-                }
+        //getting rid of repetition
+        for(int i=0; i<bits.length; i+=n){
+            int nz=0;
+            int no=0;
+            for(int k=0; k<n; k++){
+                if(bits[i+k]==0) nz++;
+                if(bits[i+k]==1) no++;
             }
-            byte finalByte = 0;
-            int maxFreq = 0;
-            for (byte currByte : frequency.keySet()) {
-                if (maxFreq < frequency.get(currByte)){ //if frequency of current byte is higher than before
-                    maxFreq = frequency.get(currByte); //update maximum frequency
-                    finalByte = currByte; //update final byte
-                }
+            if(nz>no) decodedBits[count]=0;
+            else decodedBits[count]=1;
+            count++;
+        }
+        String str;
+        count = 0;
+        //converting to byte
+        for(int i=0; i<decodedBits.length; i+=8){
+            str = new String();
+            for(int k=0; k<8; k++) {
+                str += decodedBits[i+k];
             }
-            decodedSequence[i] = finalByte;
-            count+=n;
+            int tr = Integer.parseInt(str, 2);
+            decodedSequence[count] = (byte) tr;
+            count++;
         }
         return decodedSequence;
     }
