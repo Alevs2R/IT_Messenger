@@ -1,8 +1,6 @@
 import sun.security.util.BitArray;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.util.BitSet;
+import java.io.IOException;
 
 public class ReedMuller {
     private final static int ENCODE_BIT_MATRIX[][] =
@@ -49,16 +47,12 @@ public class ReedMuller {
     public ReedMuller() {
     }
 
-    public static File encode(File file) throws IOException {
-        byte[] data = Files.readAllBytes(file.toPath());
-        int[] bits = new int[8 * data.length];
-        for (int i = 0; i < bits.length; i++) {
-            bits[i] = (data[i / 8] >> (7 - i % 8)) & 1;
-        }
-        encodeBitVector = new int[bits.length / 5 + 1][5];
+    public static byte[] encode(byte[] input) throws IOException {
+        BitArray bits = new BitArray(8 * input.length, input);
+        encodeBitVector = new int[bits.length() / 5 + 1][5];
         for (int i = 0; i < encodeBitVector.length; i++) {
             for (int j = 0; j < 5; j++) {
-                if (5 * i + j < bits.length) encodeBitVector[i][j] = bits[5 * i + j];
+                if (5 * i + j < bits.length()) encodeBitVector[i][j] = (bits.get(5 * i + j)) ? 1 : 0;
                 else encodeBitVector[i][j] = 0;
             }
         }
@@ -68,38 +62,21 @@ public class ReedMuller {
                 encodedBitVector[i][j] = multiply(encodeBitVector[i], ENCODE_BIT_MATRIX[j]) % 2;
             }
         }
-        BitSet encodedBits = new BitSet(encodedBitVector.length * 16);
+        BitArray encodedBits = new BitArray(encodedBitVector.length * 16);
         for (int i = 0; i < encodedBitVector.length; i++) {
             for (int j = 0; j < encodedBitVector[i].length; j++) {
-                if (encodedBitVector[i][j] == 1) encodedBits.set(16 * i + j);
+                encodedBits.set(16 * i + j, encodedBitVector[i][j] == 1);
             }
         }
-        String path = file.getPath();
-        String name = path.substring(path.lastIndexOf('/'), path.lastIndexOf('.'));
-        String extension = path.substring(path.lastIndexOf('.'));
-        path = path.substring(0, path.lastIndexOf('/') + 1);
-        File f = new File(path + name + "(1)" + extension);
-        Integer i = 2;
-        while (!f.createNewFile()) {
-            f.renameTo(new File(path + name + "(" + i.toString() + ")" + extension));
-            i++;
-        }
-        FileOutputStream stream = new FileOutputStream(f);
-        stream.write(encodedBits.toByteArray());
-        stream.close();
-        return f;
+        return encodedBits.toByteArray();
     }
 
-    public static File decode(File file) throws IOException {
-        byte[] data = Files.readAllBytes(file.toPath());
-        int[] bits = new int[8 * data.length];
-        for (int i = 0; i < bits.length; i++) {
-            bits[i] = (data[i / 8] >> (i % 8)) & 1;
-        }
-        decodeBitVector = new int[bits.length / 16][16];
-        for (int i = 0; i < bits.length / 16; i++) {
+    public static byte[] decode(byte[] input) throws IOException {
+       BitArray bits = new BitArray(8*input.length,input);
+        decodeBitVector = new int[bits.length() / 16][16];
+        for (int i = 0; i < bits.length() / 16; i++) {
             for (int j = 0; j < 16; j++) {
-                decodeBitVector[i][j] = 2 * bits[16 * i + j] - 1;
+                decodeBitVector[i][j] = (bits.get(16*i+j))?1:-1;
             }
         }
         int v;
@@ -131,20 +108,7 @@ public class ReedMuller {
                 ++k;
             }
         }
-        String path = file.getPath();
-        String name = path.substring(path.lastIndexOf('/'), path.lastIndexOf('.'));
-        String extension = path.substring(path.lastIndexOf('.'));
-        path = path.substring(0, path.lastIndexOf('/') + 1);
-        File f = new File(path + name + "(1)" + extension);
-        Integer i = 2;
-        while (!f.createNewFile()) {
-            f.renameTo(new File(path + name + "(" + i.toString() + ")" + extension));
-            i++;
-        }
-        FileOutputStream stream = new FileOutputStream(f);
-        stream.write(decodedBits.toByteArray());
-        stream.close();
-        return file;
+        return decodedBits.toByteArray();
     }
 
     private static int multiply(int a[], int b[]) {
