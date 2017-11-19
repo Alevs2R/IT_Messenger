@@ -15,11 +15,9 @@ public class Hamming74Coder {
             bits[i] = (byteSequence[i / 8] >> (7 - i % 8)) & 1;
         }
 
-        int[] codedBits = new int[7 * (bits.length/4) + (8-(7 * (bits.length/4))%8)%8];
 
-        for (int i = 0; i < codedBits.length; i++) {
-            codedBits[i] = 0;
-        }
+        int[] codedBits = new int[7 * (bits.length/4)];
+
 
         for (int i = 0; i < (bits.length/4); i++) {
             int[] tempBits = code4bits(new int[]{bits[4*i],bits[4*i+1],bits[4*i+2],bits[4*i+3]});
@@ -30,6 +28,19 @@ public class Hamming74Coder {
             codedBits[7*i+4] = tempBits[4];
             codedBits[7*i+5] = tempBits[5];
             codedBits[7*i+6] = tempBits[6];
+        }
+
+        if(codedBits.length % 8 != 0){
+            int[] oldcodedBits = codedBits;
+            codedBits = new int[(oldcodedBits.length/8+1) * 8];
+            int cnst = codedBits.length-oldcodedBits.length;
+            for (int i = 0; i < cnst; i++) {
+                codedBits[i] = 0;
+            }
+
+            for (int i = 0; i < oldcodedBits.length; i++) {
+                codedBits[cnst+i] = oldcodedBits[i];
+            }
         }
 
         byte[] encodedSequence = new byte[codedBits.length/8];
