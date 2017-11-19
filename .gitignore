@@ -2,3 +2,5 @@ node_modules/
 .expo/
 npm-debug.*
 .idea
+android/.gradle
+android/app/build
