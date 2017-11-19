@@ -7,23 +7,17 @@ public class Hamming74Coder {
     public Hamming74Coder() {
     }
 
-    public byte[] coding(byte[] initialBits){
+    public byte[] coding(byte[] byteSequence){
 
-        //number of bits should devides by 4
-        if((initialBits.length % 4) != 0){
-            byte[] oldInitialBits = initialBits;
-            initialBits = new byte[oldInitialBits.length/4 * 4 + 4];
-            for (int i = 0; i < 4 - (oldInitialBits.length % 4); i++) {
-                initialBits[i] = 0;
-            }
-            for (int i = 0; i < oldInitialBits.length; i++) {
-                initialBits[i + 4 - (oldInitialBits.length % 4)] = oldInitialBits[i];
-            }
+        int[] bits = new int[8 * byteSequence.length];
+        //converting all bytes to bits
+        for (int i = 0; i < bits.length; i++) {
+            bits[i] = (byteSequence[i / 8] >> (7 - i % 8)) & 1;
         }
 
-        byte[] codedBits = new byte[7 * (initialBits.length/4)];
-        for (int i = 0; i < (initialBits.length/4); i++) {
-            byte[] tempBits = code4bits(new byte[]{initialBits[4*i],initialBits[4*i+1],initialBits[4*i+2],initialBits[4*i+3]});
+        int[] codedBits = new int[7 * (bits.length/4)];
+        for (int i = 0; i < (bits.length/4); i++) {
+            int[] tempBits = code4bits(new int[]{bits[4*i],bits[4*i+1],bits[4*i+2],bits[4*i+3]});
             codedBits[7*i] = tempBits[0];
             codedBits[7*i+1] = tempBits[1];
             codedBits[7*i+2] = tempBits[2];
@@ -33,12 +27,26 @@ public class Hamming74Coder {
             codedBits[7*i+6] = tempBits[6];
         }
 
-        return codedBits;
+        byte[] encodedSequence = new byte[codedBits.length/8];
+        String str;
+        int count = 0;
+        //converting bits to bytes
+        for(int i=0; i<codedBits.length; i+=8){
+            str = new String();
+            for(int k=0; k<8; k++) {
+                str += codedBits[i+k];
+            }
+            int tr = Integer.parseInt(str, 2);
+            encodedSequence[count] = (byte) tr;
+            count++;
+        }
+
+        return encodedSequence;
 
     }
 
-    private byte[] code4bits(byte[] initialBits){
-        byte[] out_boolean = new byte[]{0,0,0,0,0,0,0};
+    private int[] code4bits (int[] initialBits){
+        int[] out_boolean = new int[]{0,0,0,0,0,0,0};
         out_boolean[0] = initialBits[0];
         out_boolean[1] = initialBits[0];
         out_boolean[2] = initialBits[0];
