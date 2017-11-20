@@ -20,7 +20,10 @@ public class NoiseGenerator {
                     value = value == 1 ? 1 : 0;
                 newValue.append(value);
             }
-            array[i] = (byte)Integer.parseInt(newValue.reverse().toString());
+            newValue = newValue.reverse();
+            String str = newValue.toString();
+            int tr = Integer.parseInt(str, 2);
+            array[i] = (byte)tr;
         }
     }
 }
