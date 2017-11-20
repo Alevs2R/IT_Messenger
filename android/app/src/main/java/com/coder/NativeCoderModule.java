@@ -1,5 +1,7 @@
 package com.coder;
 
+import com.coder.Hamming.Hamming74Coder;
+import com.coder.Hamming.Hamming74Decoder;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -18,6 +20,8 @@ import android.content.Intent;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.*;
+import java.util.Random;
+
 import com.coder.Arithmetic.*;
 
 
@@ -33,20 +37,45 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void encode(String fileName, String fileUri, String algorithm, Promise promise) {
+    public void encode(String fileName, String fileUri, String compressAlgorithm, String codingAlgorithm, String noiseLevel, Promise promise) {
         try {
             byte[] resultBytes;
             Uri myUri = Uri.parse(fileUri);
             InputStream inputStream = getReactApplicationContext().getContentResolver().openInputStream(myUri);
             byte[] inputBytes = org.apache.commons.io.IOUtils.toByteArray(inputStream);
 
-            switch(algorithm){
+            switch(compressAlgorithm){
                 case "arithmetic":
                     ArithmeticCoding coder = new ArithmeticCoding();
                     resultBytes = coder.compress(inputBytes);
                     break;
                 default:
-                    throw new Exception("no algorithm provided");
+                    throw new Exception("no compress algorithm provided");
+            }
+
+            switch(codingAlgorithm){
+                case "hamming":
+                    Hamming74Coder hamming74coder = new Hamming74Coder();
+                    resultBytes = hamming74coder.coding(resultBytes);
+                    break;
+                case "rm":
+                    ReedMuller reedMuller = new ReedMuller();
+                    resultBytes = reedMuller.encode(resultBytes);
+                    break;
+                default:
+                    throw new Exception("no coding algorithm provided");
+            }
+
+            switch(noiseLevel){
+                case "1":
+                    generateNoise(resultBytes, 0.01);
+                    break;
+                case "5":
+                    generateNoise(resultBytes, 0.05);
+                    break;
+                case "15":
+                    generateNoise(resultBytes, 0.15);
+                    break;
             }
 
             File resultFile = new File(getReactApplicationContext().getFilesDir(),fileName);
@@ -78,6 +107,14 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
                 case "arithmetic":
                     ArithmeticCoding coder = new ArithmeticCoding();
                     resultBytes = coder.decompress(inputBytes);
+                    break;
+                case "hamming":
+                    Hamming74Decoder hamming74Coder = new Hamming74Decoder();
+                    resultBytes = hamming74Coder.decoding(inputBytes);
+                    break;
+                case "rm":
+                    ReedMuller reedMuller = new ReedMuller();
+                    resultBytes = reedMuller.decode(inputBytes);
                     break;
                 default:
                     throw new Exception("no algorithm provided");
@@ -118,5 +155,31 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
         intent.setDataAndType(uri, mime);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
         getReactApplicationContext().startActivity(intent);
+    }
+
+    /**
+     * This function takes byte array as an input and performs some flipping of bits
+     * with probability of epsilon.
+     * @param array is the input byte array
+     * @param epsilon is the probability of flipping a bit
+     */
+    static void generateNoise(byte[] array, double epsilon) {
+        Random random = new Random();
+        for (int i = 0; i < array.length; i++) {
+            StringBuilder newValue = new StringBuilder();
+            for (int j = 0; j < 8; j++) {
+                byte temp = array[i];
+                int value = (temp >>> (j)) & 1;
+                if (epsilon >= random.nextDouble())
+                    value = value == 1 ? 0 : 1;
+                else
+                    value = value == 1 ? 1 : 0;
+                newValue.append(value);
+            }
+            newValue = newValue.reverse();
+            String str = newValue.toString();
+            int tr = Integer.parseInt(str, 2);
+            array[i] = (byte)tr;
+        }
     }
 }

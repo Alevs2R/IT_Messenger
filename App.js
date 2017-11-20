@@ -27,6 +27,7 @@ export default class App extends React.Component {
     logout = () => {
         this.setState({screen: LOGIN_SCREEN, nickname: ''});
         AsyncStorage.removeItem('nickname');
+        AsyncStorage.removeItem('messages');
     };
 
     render() {
