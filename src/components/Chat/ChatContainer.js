@@ -22,7 +22,7 @@ export default class ChatContainer extends React.Component {
         settings:{
             codingAlgo: 'hamming',
             compressionAlgo: 'arithmetic',
-            noiseLevel: '1',
+            noiseLevel: '0',
         },
     };
 

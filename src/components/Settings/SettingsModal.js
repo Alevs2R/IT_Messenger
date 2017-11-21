@@ -37,6 +37,7 @@ export default class SettingsModal extends Component {
                         <Picker
                             selectedValue={this.props.settings.noiseLevel}
                             onValueChange={(itemValue) => this.props.setSettings({noiseLevel: itemValue})}>
+                            <Picker.Item label="no noise" value="0" />
                             <Picker.Item label="1%" value="1" />
                             <Picker.Item label="5%" value="5" />
                             <Picker.Item label="15%" value="15" />
