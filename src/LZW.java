@@ -146,12 +146,7 @@ class LZW {
             symbols[i] = Character.toString((char) i);
         }
         count = 256;
-        FileOutputStream fos = new FileOutputStream("file.temp");
-        File file = new File("file.temp"); //temporary file (faster to work with that the array)
-        fos.write(b);
-        fos.close();
-        DataInputStream in = new DataInputStream(new BufferedInputStream(
-                new FileInputStream("file.temp")));
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(b));
         DataOutputStream out = new DataOutputStream(new BufferedOutputStream(
                 new FileOutputStream(fileName)));
         int currentWord, previousWord;
@@ -189,7 +184,5 @@ class LZW {
         }
         in.close();
         out.close();
-        if (!file.delete())
-            throw new IllegalArgumentException("The filename is wrong");
     }
 }
