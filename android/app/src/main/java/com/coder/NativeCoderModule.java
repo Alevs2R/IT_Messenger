@@ -2,6 +2,8 @@ package com.coder;
 
 import com.coder.Hamming.Hamming74Coder;
 import com.coder.Hamming.Hamming74Decoder;
+import com.coder.Repetition.RepetitionDecoder;
+import com.coder.Repetition.RepetitionEncoder;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -49,6 +51,14 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
                     ArithmeticCoding coder = new ArithmeticCoding();
                     resultBytes = coder.compress(inputBytes);
                     break;
+                case "rle":
+                    RunLengthCompression runLengthCompression = new RunLengthCompression();
+                    resultBytes = runLengthCompression.compress(inputBytes);
+                    break;
+                case "lzw":
+                    LZW lzw = new LZW();
+                    resultBytes = lzw.compress(inputStream);
+                    break;
                 default:
                     throw new Exception("no compress algorithm provided");
             }
@@ -61,6 +71,10 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
                 case "rm":
                     ReedMuller reedMuller = new ReedMuller();
                     resultBytes = reedMuller.encode(resultBytes);
+                    break;
+                case "repetition":
+                    RepetitionEncoder repetitionEncoder = new RepetitionEncoder();
+                    resultBytes = repetitionEncoder.encode(resultBytes, 3);
                     break;
                 default:
                     throw new Exception("no coding algorithm provided");
@@ -97,11 +111,18 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void decode(String fileName, String fileUri, String algorithm, Promise promise) {
         try {
-            byte[] resultBytes;
+            byte[] resultBytes = null;
            // Uri myUri = Uri.parse(fileUri);
            // InputStream inputStream = getReactApplicationContext().getContentResolver().openInputStream(myUri);
             InputStream inputStream = new FileInputStream(fileUri);
             byte[] inputBytes = org.apache.commons.io.IOUtils.toByteArray(inputStream);
+
+            File decodedDir = new File(getReactApplicationContext().getFilesDir(), "decoded");
+            decodedDir.mkdir();
+            File resultFile = new File(decodedDir, fileName);
+            FileOutputStream outputStream = null;
+
+            int endSize = 0;
 
             switch(algorithm){
                 case "arithmetic":
@@ -116,23 +137,39 @@ public class NativeCoderModule extends ReactContextBaseJavaModule {
                     ReedMuller reedMuller = new ReedMuller();
                     resultBytes = reedMuller.decode(inputBytes);
                     break;
+                case "rle":
+                    RunLengthCompression runLengthCompression = new RunLengthCompression();
+                    resultBytes = runLengthCompression.decompress(inputBytes);
+                    break;
+                case "lzw":
+                    LZW lzw = new LZW();
+                    outputStream = new FileOutputStream(resultFile, false);
+                    endSize = lzw.decompress(inputBytes,outputStream);
+                    break;
+                case "repetition":
+                    RepetitionDecoder repetitionDecoder = new RepetitionDecoder();
+                    resultBytes = repetitionDecoder.decode(inputBytes, 3);
+                    break;
                 default:
                     throw new Exception("no algorithm provided");
             }
 
-            File decodedDir = new File(getReactApplicationContext().getFilesDir(), "decoded");
-            decodedDir.mkdir();
-            File resultFile = new File(decodedDir, fileName);
-            FileOutputStream outputStream = new FileOutputStream(resultFile, false);
-            outputStream.write(resultBytes);
-            outputStream.close();
+            if(outputStream == null){
+                outputStream = new FileOutputStream(resultFile, false);
+                outputStream.write(resultBytes);
+                outputStream.close();
+            }
 
             WritableMap map = Arguments.createMap();
             map.putString("fileName", resultFile.getName());
             map.putString("type", "application/octet-stream");
             map.putString("uri", resultFile.toURI().getPath());
             map.putInt("encodedSize", inputBytes.length);
-            map.putInt("decodedSize", resultBytes.length);
+            if(resultBytes != null){
+                map.putInt("decodedSize", resultBytes.length);
+            } else {
+                map.putInt("decodedSize", endSize);
+            }
             promise.resolve(map);
         } catch (Exception e) {
             promise.reject("ENCODE_ERROR", e);

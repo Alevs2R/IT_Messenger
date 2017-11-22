@@ -15,10 +15,9 @@ class LZW {
      * compressed byte array. Since computers don't support 12bit structures,
      * all the result is saved in 3 bytes (2 times using 12 bit).
      *
-     * @param fileName is the input file that needs to be compressed
      * @throws IOException if file doesn't exist
      */
-    byte[] compress(String fileName) throws IOException {
+    byte[] compress(InputStream fileInputStream) throws IOException {
         symbols = new String[MAX_NUM];
         for (int i = 0; i < 256; i++) {
             table.put(Character.toString((char) i), i);
@@ -26,9 +25,8 @@ class LZW {
         }
         count = 256;
         // Input stream
-        DataInputStream read = new DataInputStream(new BufferedInputStream(
-                new FileInputStream(fileName)));
-        System.out.println("Size before compression: " + (((double)read.available()/1024)/1024) + "MBytes");
+        DataInputStream read = new DataInputStream(new BufferedInputStream(fileInputStream));
+     //   System.out.println("Size before compression: " + (((double)read.available()/1024)/1024) + "MBytes");
         // Output stream
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte input_byte;
@@ -90,7 +88,7 @@ class LZW {
             }
         }
         read.close(); // close the input stream
-        System.out.println("Size after compression: " + (((double)out.size() * 3/1024)/4096) + "MBytes");
+ //       System.out.println("Size after compression: " + (((double)out.size() * 3/1024)/4096) + "MBytes");
         return out.toByteArray();
     }
 
@@ -139,23 +137,16 @@ class LZW {
 
     /**
      * Decompression algorithm for ZLW compressed array of bytes.
-     * @param fileName in which file result of decompression should be saved
      */
-    void decompress(byte[] b, String fileName) throws IOException {
+    int decompress(byte[] b, FileOutputStream fileOutputStream) throws IOException {
         symbols = new String[4096];
         for (int i = 0; i < 256; i++) {
             table.put(Character.toString((char) i), i);
             symbols[i] = Character.toString((char) i);
         }
         count = 256;
-        FileOutputStream fos = new FileOutputStream("file.temp");
-        File file = new File("file.temp"); //temporary file (faster to work with that the array)
-        fos.write(b);
-        fos.close();
-        DataInputStream in = new DataInputStream(new BufferedInputStream(
-                new FileInputStream("file.temp")));
-        DataOutputStream out = new DataOutputStream(new BufferedOutputStream(
-                new FileOutputStream(fileName)));
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(b));
+        DataOutputStream out = new DataOutputStream(new BufferedOutputStream(fileOutputStream));
         int currentWord, previousWord;
         byte[] buffer = new byte[3]; //buffer for 2 coded words (12bit each = 24bits = 3 bytes)
         buffer[0] = in.readByte(); // read first two bytes
@@ -190,8 +181,8 @@ class LZW {
             previousWord = currentWord; // update the words
         }
         in.close();
+        int result = out.size();
         out.close();
-        if (!file.delete())
-            throw new IllegalArgumentException("The filename is wrong");
+        return result;
     }
 }
