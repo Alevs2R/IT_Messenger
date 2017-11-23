@@ -13,10 +13,10 @@ class LZW {
      * compressed byte array. Since computers don't support 12bit structures,
      * all the result is saved in 3 bytes (2 times using 12 bit).
      *
-     * @param fileName is the input file that needs to be compressed
+     * @param array is the input file that needs to be compressed
      * @throws IOException if file doesn't exist
      */
-    byte[] compress(String fileName) throws IOException {
+    byte[] compress(byte[] array) throws IOException {
         symbols = new String[MAX_NUM];
         for (int i = 0; i < 256; i++) {
             table.put(Character.toString((char) i), i);
@@ -24,8 +24,7 @@ class LZW {
         }
         count = 256;
         // Input stream
-        DataInputStream read = new DataInputStream(new BufferedInputStream(
-                new FileInputStream(fileName)));
+        DataInputStream read = new DataInputStream(new ByteArrayInputStream(array));
         System.out.println("Size before compression: " + (((double)read.available()/1024)/1024) + "MBytes");
         // Output stream
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -137,18 +136,18 @@ class LZW {
 
     /**
      * Decompression algorithm for ZLW compressed array of bytes.
-     * @param fileName in which file result of decompression should be saved
+     * @param b is the array of decompressed bytes
      */
-    void decompress(byte[] b, String fileName) throws IOException {
+    byte[] decompress(byte[] b) throws IOException {
         symbols = new String[4096];
         for (int i = 0; i < 256; i++) {
             table.put(Character.toString((char) i), i);
             symbols[i] = Character.toString((char) i);
         }
         count = 256;
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
         DataInputStream in = new DataInputStream(new ByteArrayInputStream(b));
-        DataOutputStream out = new DataOutputStream(new BufferedOutputStream(
-                new FileOutputStream(fileName)));
+        DataOutputStream out = new DataOutputStream(result);
         int currentWord, previousWord;
         byte[] buffer = new byte[3]; //buffer for 2 coded words (12bit each = 24bits = 3 bytes)
         buffer[0] = in.readByte(); // read first two bytes
@@ -184,5 +183,6 @@ class LZW {
         }
         in.close();
         out.close();
+        return result.toByteArray();
     }
 }
